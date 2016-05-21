@@ -1,0 +1,77 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />    
+    <style type="text/css">
+        .style1
+        {
+            height: 165px;
+            width: 227px;
+        }
+        .style3
+        {
+            height: 165px;
+            width: 631px;
+        }
+        .style4
+        {
+            text-align: justify;
+            padding-right: 3em;
+            width: 631px;
+        }
+        .style5
+        {
+            width: 227px;
+        }
+        .style6
+        {
+            width: 801px;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+                <div id="header">
+                <img class="style6" src="Styles/logo.jpg" alt="slika" runat="server" style="padding-top: 11px; padding-left:4px; padding-bottom: 22px;" />
+                </div>
+        <div id="meni" width="820px">
+            <br />
+            <br />
+                <ul style="margin-top: -30px; margin-left: 0px; padding-left:0px;">
+                    <li><a href="<%= ResolveClientUrl("~/Forme/User/Pocetna.aspx") %>">Praksa</a></li>
+                    <li><a href="<%= ResolveClientUrl("~/Forme/User/Student.aspx") %>">Studij</a></li>
+                    <% if (HttpContext.Current.User.IsInRole("Prof")) { %>
+                    <li><a href="<%= ResolveClientUrl("~/Forme/Prof/Pregled.aspx") %>">Studenti</a></li>
+                    <% } %>
+                    <li><a href="<%= ResolveClientUrl("~/Forme/User/OProjektu.aspx") %>">Informacije</a></li>
+                    <% if (HttpContext.Current.User.IsInRole("Admin")) { %>
+                    <li><a href="<%= ResolveClientUrl("~/Forme/Admin/Admin.aspx") %>">Administracija</a></li>
+                    <% } %>
+                    <li><a href="<%= ResolveClientUrl("~/Login.aspx") %>">Logiranje</a></li>
+                </ul>
+
+            </div>
+
+            <div id="content">
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="Server" />
+                <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+                </ContentTemplate>
+                </asp:UpdatePanel>  
+            </div>                    
+    </div>    
+    </form>
+</body>
+</html>
